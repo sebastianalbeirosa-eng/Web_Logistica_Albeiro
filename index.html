@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- METADATOS Y CONFIGURACION -->
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Guillermo Sebastian Albeiro">
+    <meta name="description" content="Trabajo Final Integrador - Sitio web de Logística Albeiro nativo y accesible.">
+    <meta name="keywords" content="HTML, CSS, Grid, Flexbox, JavaScript, Logística, W3C, Accesibilidad">
+
+    <title>Albeiro Logística | Transporte y Distribución</title>
+
+    <!-- Conectamos la hoja de estilos donde va a estar toda la maquetacion -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Conectamos el script de JS. Le pongo 'defer' para que el navegador cargue 
+         primero todo el HTML y recien despues ejecute el JS, asi no se traba la carga -->
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <!-- CONTENEDOR PRINCIPAL - GRID -->
+    <!-- Este div envuelve todo y nos sirve para armar el Grid general bidimensional que pide el profe -->
+    <div id="layout">
+
+        <!-- HEADER -->
+        <!-- Separamos el encabezado semanticamente. Aca va la identidad de la empresa -->
+        <header id="header">
+            <div class="logo-contenedor">
+                <!-- Usamos una ruta organizada dentro de la carpeta imagenes -->
+                <img src="imagenes/ALBEIRO-Logistica-logos_white.png" width="320" height="150" alt="Logotipo Oficial de Logística Albeiro">
+            </div>
+            <div>
+                <h1>Albeiro Logística</h1>
+                <p>Eficiencia, seguridad y compromiso en cada envío.</p>
+            </div>
+            
+            <div class="control-tema">
+                <button id="toggle-modo">Modo Oscuro</button>
+            </div>
+        </header>
+
+        <!-- NAVEGACION  - NAV -->
+        <!-- La barra de menu va en su propia etiqueta nav para cumplir con las reglas de HTML5 -->
+        <nav id="nav">
+            <ul>
+                <!-- Dejamos listos los links a las 4 paginas del Trabajo Final -->
+                <li><a href="index.html" class="nav-link active">Inicio</a></li>
+                <li><a href="texto.html" class="nav-link">Normativas</a></li>
+                <li><a href="flota.html" class="nav-link">Flota</a></li>
+                <li><a href="contacto.html" class="nav-link">Cotizaciones</a></li>
+            </ul>
+        </nav>
+
+        <!--  MAIN  -->
+        <!-- Como es el Index, la consigna pide un layout clasico de ancho completo, sin el aside lateral -->
+        <main id="main">
+            
+            <section class="hero-presentacion">
+                <h2>Líderes en Logística Nacional</h2>
+                <p>Conectamos tus proyectos con todo el país, de forma segura y eficiente.</p>
+            </section>
+
+            <section class="introduccion-servicios">
+                <h2>Nuestros Servicios Integrales</h2>
+                <p>
+                    Brindamos soluciones de transporte, almacenamiento y distribución inteligente de mercaderías. 
+                    Garantizamos un servicio interoperable y de alta eficiencia tecnológica para conectar tu empresa con todo el país.
+                </p>
+                
+            </section>
+
+        </main>
+
+        <!--  FOOTER  -->
+        <!-- El pie de pagina con algunos de mis datos -->
+        <footer id="footer">
+            <div class="footer-info">
+                <p>Copyright &copy; 2026 - Página creada por Guillermo Sebastian Albeiro - Todos los derechos reservados.</p>
+                <p>Sede Pellegrini | TU Tecnologías de Programación</p>
+            </div>
+            
+            <!-- Aca los logos validadores del W3C como garantia de calidad tecnica :) -->
+            <div class="footer-certificaciones">
+                <a href="https://validator.w3.org/check?uri=referer" target="_blank" rel="noopener">
+                    <img src="https://www.w3.org/Icons/valid-html401" alt="¡HTML Válido!" height="31" width="88">
+                </a>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" target="_blank" rel="noopener">
+                    <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="¡CSS Válido!" height="31" width="88">
+                </a>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

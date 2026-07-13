@@ -1,0 +1,501 @@
+/* 1. VARIABLES CSS - Paleta para el Modo Claro/Oscuro */
+:root {
+    /* MODO CLARO (Por defecto) */
+    --color-principal: #0d47a1;     /* Azul corporativo de Logística Albeiro */
+    --color-secundario: #ffb300;    /* Amarillo vial para botones y destacados */
+    --color-fondo: #f4f6f9;         /* Gris muy claro para el fondo de la pantalla */
+    --color-superficie: #ffffff;    /* Blanco para los bloques y tarjetas */
+    --color-texto: #1a1a1a;         /* Gris casi negro para que se lea perfecto */
+    --color-borde: #dcdcdc;         /* Gris sutil para separar cositas */
+    --color-hover: #0a3580;         /* Azul más oscuro para los hovers */
+}
+
+/* Cuando nuestro script de JS le clava la clase '.dark-mode' al body, cambian las variables */
+body.dark-mode {
+    /* MODO OSCURO */
+    --color-principal: #1e3a8a;     /* Azul un toque mas apagado para descansar la vista */
+    --color-secundario: #ffa000;    /* Amarillo vial que resalte en la oscuridad */
+    --color-fondo: #121212;         /* Fondo oscuro general */
+    --color-superficie: #1e1e1e;    /* Gris oscuro para los bloques tarjetas, header, etc */
+    --color-texto: #f5f5f5;         /* Texto claro para leer sin quedar ciego */
+    --color-borde: #333333;         /* Bordes oscuros */
+    --color-hover: #3b82f6;         /* Azul más electrico para los enlaces oscuros */
+}
+
+/* 2. RESETEO BÁSICO Y ESTILOS GLOBALES*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Clave para que los paddings no ensanchen los bloques */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6; /* Interlineado comodo exigido en el manejo de texto */
+}
+
+/* 3. ESTRUCTURA MACRO CON CSS GRID El esqueleto bidimensional */
+
+/* EL INDEX (Por defecto, ancho completo SIN ASIDE) */
+#layout {
+    display: grid;
+    min-height: 100vh; /* Para que ocupe todo el alto de la pantalla */
+    grid-template-columns: 1fr; /* Una sola columna gigante */
+    grid-template-rows: auto auto 1fr auto; /* Filas: header, nav, contenido (crece solo), footer */
+    grid-template-areas: 
+        "cabecera"
+        "navegacion"
+        "principal"
+        "pie";
+}
+
+#layout.con-aside {
+    grid-template-columns: 3fr 1fr; /* Columna principal grande y una mAs chica para el aside */
+    grid-template-areas: 
+        "cabecera cabecera"
+        "navegacion navegacion"
+        "principal aside"
+        "pie pie";
+}
+
+/* Asignamos cada etiqueta semantica a su area del Grid */
+#header { grid-area: cabecera; }
+#nav    { grid-area: navegacion; }
+#main   { grid-area: principal; }
+#aside  { grid-area: aside; }
+#footer { grid-area: pie; }
+
+/* 4. HEADER */
+#header {
+    background-color: var(--color-principal);
+    color: #ffffff; /* El texto de la cabecera siempre blanco fija */
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Titulo a la izquierda, botn a la derecha */
+    border-bottom: 4px solid var(--color-secundario);
+    
+}
+
+/* Titulo grande y con degradado para que la marca tenga presencia */
+#header h1 {
+    font-size: 80px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+
+    text-shadow:
+        2px 2px 4px rgba(0,0,0,.35),
+        0 0 12px rgba(255,255,255,.15);
+
+    display: inline-block;
+    border-bottom: 4px solid var(--color-secundario);
+    padding-bottom: 6px;
+
+    transition: transform .25s ease,
+                text-shadow .25s ease;
+}
+
+#header h1:hover {
+    transform: translateY(-2px);
+    text-shadow:
+        3px 3px 6px rgba(0,0,0,.45),
+        0 0 18px rgba(255,179,0,.45);
+
+    cursor: default;
+}
+
+/* El eslogan acompañando en sintonia con el h1 */
+#header p {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.logo-contenedor img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* BOTON MODO OSCURO */
+#toggle-modo {
+    background-color: var(--color-secundario);
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggle-modo:hover, #toggle-modo:focus {
+    background-color: #e69500;
+    outline: 2px solid var(--color-texto); /* Para accesibilidad visual al enfocar */
+}
+
+/* 5. BARRA DE NAVEGACIÓN (FLEXBOX UNIDIMENSIONAL) */
+#nav {
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+#nav ul {
+    display: flex; /* En fila horizontal */
+    list-style: none;
+    flex-wrap: wrap; /* Para que en pantallas chicas los links bajen de linea en vez de desbordar */
+}
+
+#nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--color-texto);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Pseudoclases obligatorias para el foco y hover en el menu */
+#nav ul li a:hover, #nav ul li a:focus {
+    background-color: var(--color-principal);
+    color: #ffffff;
+}
+
+#nav ul li a.active {
+    border-bottom: 4px solid var(--color-secundario);
+    color: var(--color-principal);
+}
+
+/* 6. CONTENIDO PRINCIPAL Y BARRA LATERAL generales, para todas las paginas */
+#main {
+    background-color: var(--color-superficie);
+    padding: 40px;
+}
+
+#aside {
+    background-color: var(--color-fondo);
+    padding: 40px;
+    border-left: 1px solid var(--color-borde);
+}
+
+/* Espaciado general de #main y #aside: esto reemplaza a todos los <br> 
+   que saque del HTML, para que el contenido respire solo sin necesitar 
+   etiquetas de salto de linea */
+#main h2 {
+    margin-bottom: 15px;
+}
+
+#main h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#main p {
+    margin-bottom: 15px;
+}
+
+/* Si hay mas de una section seguida dentro de #main (como en el index, 
+   con el hero y la seccion de servicios), les metemos separacion automatica */
+#main section + section {
+    margin-top: 40px;
+}
+
+#aside h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* El primer h3 del aside no necesita margen arriba, ya tiene el padding del contenedor */
+#aside h3:first-of-type {
+    margin-top: 0;
+}
+
+#aside p {
+    margin-bottom: 10px;
+}
+
+#aside ul {
+    list-style-position: inside;
+    margin-top: 5px;
+}
+
+/* 7. FOOTER*/
+#footer {
+    background-color: var(--color-principal);
+    color: #ffffff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between; /* Texto a la izquierda, sellos a la derecha */
+    align-items: center;
+    flex-wrap: wrap; /* Para que en celu no se aplaste todo en una sola fila */
+    gap: 15px;
+    border-top: 4px solid var(--color-secundario);
+}
+
+.footer-certificaciones img {
+    margin-left: 10px;
+    border-radius: 3px;
+}
+
+/*  8. PAGINA INTERNA 1: TEXTO Y TIPOGRAFIA (texto.html) */
+.seccion-texto p {
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+/* Estilos semanticos personalizados */
+strong {
+    color: var(--color-principal);
+}
+
+mark {
+    background-color: var(--color-secundario);
+    color: #000000;
+    padding: 2px 6px;
+    font-weight: bold;
+}
+
+blockquote {
+    border-left: 5px solid var(--color-principal);
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    background-color: var(--color-fondo);
+}
+
+/*  9. PAGINA INTERNA 2: FORMULARIO (contacto.html) */
+form {
+    max-width: 600px;         /* Le ponemos un tope de ancho para que no se estire */
+    margin: 0 auto;           /* Centra el formulario horizontalmente dentro del contenedor #main */
+    width: 100%;              /* Permite que sea responsive si la pantalla es más chica que 600px */
+}
+
+form fieldset {
+    border: 1px solid var(--color-borde);
+    padding: 25px;
+    border-radius: 8px;
+    background-color: var(--color-fondo);
+    margin-bottom: 25px;      /* Separa un fieldset del otro prolijamente */
+}
+
+form legend {
+    font-weight: bold;
+    padding: 0 10px;
+    color: var(--color-principal);
+    font-size: 18px;
+}
+
+.grupo-formulario {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; 
+}
+
+.grupo-formulario label {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.grupo-formulario input, .grupo-formulario textarea {
+    padding: 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+    font-size: 16px;
+}
+
+/* Validacion visual interactiva */
+.grupo-formulario input:focus, .grupo-formulario textarea:focus {
+    outline: 2px solid var(--color-principal);
+}
+
+.texto-ayuda {
+    font-size: 13px;
+    color: #666666;
+    margin-top: 5px;
+}
+
+body.dark-mode .texto-ayuda {
+    color: #b0b0b0;
+}
+
+/* ALINEACION DEL BOTON DE ENVIAR */
+.boton-enviar {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;       /* Al estar en un contenedor flex columna, esto lo centra y evita que ocupe el 100% */
+    width: auto;
+    transition: background-color 0.2s ease, transform 0.1s ease; 
+}
+
+.boton-enviar:hover, .boton-enviar:focus {
+    background-color: var(--color-hover);
+}
+
+.boton-enviar:active {
+    transform: scale(0.98); 
+}
+
+/* 10. PÁGINA INTERNA 3: FLOTA (Flexbox y efectos visuales) */
+.box-articulos {
+    display: flex;
+    flex-wrap: wrap; /* Clave: si no entran las tarjetas, bajan solas */
+    gap: 20px; /* SeparaciOn prolija entre tarjetas */
+    margin-top: 10px;
+}
+
+.card-galeria {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    overflow: hidden; /* Corta lo que se salga de la tarjeta al hacer zoom */
+    flex: 1 1 calc(50% - 20px); /* Hace que entren de a dos tarjetas por fila */
+    min-width: 280px; /* Para que en pantallas chicas se vuelvan de una sola columna */
+}
+
+.card-galeria figure {
+    width: 100%;
+}
+
+.card-galeria img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Recorta la imagen para que rellene el contenedor sin deformarse */
+    /* EFECTO EXIGIDO: transiciOn nativa para que el zoom dure medio segundo y sea suave */
+    transition: transform 0.5s ease;
+}
+
+.card-galeria h3 {
+    padding: 12px 15px 0 15px;
+    font-size: 16px;
+    color: var(--color-principal);
+}
+
+/* EFECTO INTERACTIVO: al pasar el mouse (:hover) o pararse con teclado (:focus-within) */
+.card-galeria:hover img, .card-galeria:focus-within img {
+    transform: scale(1.08); /* Zoom suave del 8% */
+}
+
+.card-galeria figcaption {
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--color-superficie);
+    border-top: 1px solid var(--color-borde);
+}
+
+/* 11. HERO BANNER DEL INDEX */
+.hero-presentacion {
+    background-image: url('../imagenes/camion-en-ruta.jpeg');
+    background-size: cover;         
+    background-position: center;     
+    background-repeat: no-repeat;
+    border-radius: 8px;              
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+    padding: 140px 40px;              
+    text-align: center;              
+    color: #ffffff;                  
+}
+
+.hero-presentacion h2 {
+    font-size: 44px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    /* Clave de accesibilidad: sombra negra al texto para que se lea sobre el fondo natural */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9); 
+}
+
+.hero-presentacion p {
+    font-size: 22px;
+    max-width: 800px;
+    margin: 0 auto;                  
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* 12. RESPONSIVE - DESAFIO OPTATIVO DEL PROFE (Media Queries) */
+/* A partir de los 768px de ancho para abajo (tablets chicas y celulares), 
+   achicamos todo para que no quede apretado ni se desborde */
+@media (max-width: 768px) {
+
+    /* El Grid de las paginas internas pasa de 2 columnas (principal + aside) 
+       a 1 sola columna: primero el contenido principal y abajo el aside */
+    #layout.con-aside {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "cabecera"
+            "navegacion"
+            "principal"
+            "aside"
+            "pie";
+    }
+
+    /* El header en columna para que el logo, el titulo y el boton 
+       no queden apretados en una sola fila */
+    #header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    /* Bajamos el tamaño del titulo gigante, en celu 56px es demasiado */
+    #header h1 {
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+
+    #header p {
+        font-size: 15px;
+    }
+
+    /* El menu de navegacion pasa de fila a columna para que los links 
+       se puedan tocar comodos con el dedo */
+    #nav ul {
+        flex-direction: column;
+    }
+
+    #nav ul li a {
+        text-align: center;
+    }
+
+    /* Achicamos los paddings grandes de main y aside para aprovechar 
+       mejor el espacio en pantallas chicas */
+    #main, #aside {
+        padding: 25px 20px;
+    }
+
+    /* La galeria de flota pasa de 2 tarjetas por fila a 1 sola columna */
+    .card-galeria {
+        flex: 1 1 100%;
+    }
+
+    /* El hero banner del index baja su padding gigante, si no ocupa 
+       toda la pantalla del celu solo con aire vacio */
+    .hero-presentacion {
+        padding: 70px 20px;
+    }
+
+    .hero-presentacion h2 {
+        font-size: 28px;
+    }
+
+    .hero-presentacion p {
+        font-size: 17px;
+    }
+}

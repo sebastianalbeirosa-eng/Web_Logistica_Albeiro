@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <!-- METADATOS Y CONFIGURACION -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Guillermo Sebastian Albeiro">
+    <meta name="description" content="Galería de imágenes de la flota de camiones e infraestructura de Logística Albeiro.">
+    <meta name="keywords" content="Imágenes, Flota, Camiones, Depósitos, HTML, CSS, W3C, Cards">
+
+    <title>Nuestra Flota | Albeiro Logística</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <div id="layout" class="con-aside">
+
+        <header id="header">
+            <div class="logo-contenedor">
+                <img src="imagenes/ALBEIRO-Logistica-logos_white.png" width="250" height="150" alt="Logotipo Oficial de Logística Albeiro">
+            </div>
+            <div>
+                <h1>Albeiro Logística</h1>
+                <p>Eficiencia, seguridad e interoperabilidad en cada envío.</p>
+            </div>
+
+            <div class="control-tema">
+                <button id="toggle-modo">Modo Oscuro</button>
+            </div>
+        </header>
+
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="texto.html" class="nav-link">Normativas</a></li>
+                <li><a href="flota.html" class="nav-link active">Flota</a></li>
+                <li><a href="contacto.html" class="nav-link">Cotizaciones</a></li>
+            </ul>
+        </nav>
+
+        <main id="main">
+
+            <!-- Envolvemos todo en una section para agrupar el contenido tematico  -->
+            <section class="seccion-flota">
+                <h2>Nuestra Infraestructura y Flota Comercial</h2>
+                <p>Conocé las unidades y los centros de distribución que hacen posible que tu mercadería llegue a tiempo.</p>
+
+                <!-- Cada card es un article porque tiene sentido propio e independiente  -->
+                <div class="box-articulos">                
+                    
+                    <!-- Le agregue un h3 a cada article, el validador W3C tira una advertencia 
+                         si un article no tiene su propio encabezado, porque semanticamente 
+                         se supone que es un contenido independiente y necesita poder 
+                         identificarse solo. El figcaption no cuenta como encabezado para esto, 
+                         son dos cosas distintas, el figcaption describe la imagen puntual, 
+                         el h3 identifica de que trata la card en general -->
+                    <article class="card-galeria">
+                        <h3>Transporte de Larga Distancia</h3>
+                        <figure>
+                            <img src="imagenes/camion-scania.jpg" alt="Camión Scania frontal color azul en ruta">
+                            <figcaption>Unidad para transporte nacional de larga distancia.</figcaption>
+                        </figure>
+                    </article>
+
+                    <article class="card-galeria">
+                        <h3>Depósitos Inteligentes</h3>
+                        <figure>
+                            <img src="imagenes/deposito.jpg" alt="Interior de un depósito logístico gigante con estanterías industriales repletas de mercadería">
+                            <figcaption>Depósitos inteligentes con control de stock automatizado.</figcaption>
+                        </figure>
+                    </article>
+
+                    <article class="card-galeria">
+                        <h3>Distribución Urbana</h3>
+                        <figure>
+                            <img src="imagenes/furgon.jpg" alt="Furgon de reparto urbana de Logística Albeiro haciendo una entrega en ciudad">
+                            <figcaption>Flota ligera destinada a la distribución de última milla.</figcaption>
+                        </figure>
+                    </article>
+
+                    <article class="card-galeria">
+                        <h3>Nuestro Equipo</h3>
+                        <figure>
+                            <img src="imagenes/operarios.jpg" alt="Grupo de operarios logísticos con chalecos refractarios y cascos trabajando en equipo">
+                            <figcaption>Personal calificado en la carga y descarga segura de mercaderías.</figcaption>
+                        </figure>
+                    </article>
+
+                </div>
+            </section>
+        </main>      
+
+        <aside id="aside">
+            <h3>Nuestra Capacidad</h3>
+            <p><strong>+50 Unidades:</strong> Contamos con camiones modernos equipados con la última tecnología vial.</p>
+            <p><strong>Puntos Estratégicos:</strong> Bases operativas en toda la región para agilizar los tiempos de despacho.</p>
+            
+            <h3>Mantenimiento</h3>
+            <p>Todas nuestras unidades entran a taller de forma preventiva cada 10.000 km para garantizar la seguridad total.</p>
+        </aside>
+
+        <footer id="footer">
+            <div class="footer-info">
+                <p>Copyright &copy; 2026 - Página creada por Guillermo Sebastian Albeiro - Todos los derechos reservados.</p>
+                <p>Sede Pellegrini | TU Tecnologías de Programación</p>
+            </div>
+            <div class="footer-certificaciones">
+                <a href="https://validator.w3.org/check?uri=referer" target="_blank" rel="noopener">
+                    <img src="https://www.w3.org/Icons/valid-html401" alt="¡HTML Válido!" height="31" width="88">
+                </a>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" target="_blank" rel="noopener">
+                    <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="¡CSS Válido!" height="31" width="88">
+                </a>
+            </div>
+        </footer>
+
+    </div>    
+</body>
+</html>
